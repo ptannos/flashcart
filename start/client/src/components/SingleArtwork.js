@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "./footer";
 
 class SingleArtwork extends React.Component {
   constructor(props) {
@@ -7,93 +8,92 @@ class SingleArtwork extends React.Component {
       title: "",
       date: "",
       artist: "",
-      origin: "",
+      guess: "",
       answer: false,
+      tryAgain: false,
       next: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleCheckOrigin = this.handleCheckOrigin.bind(this);
-    // this.handleNext = this.handleNext.bind(this);
-  }
-
-  componentDidMount() {
-    const arrIds = [
-      12267, 12985, 13004, 13123, 13125, 11827, 13415, 13417, 40184, 14105,
-      14111, 12679, 12681, 10271, 11118, 12236, 12862, 12867, 12872, 12891,
-      12930, 21678, 59927, 56175,
-    ];
-    const randomInt = Math.floor(Math.random() * 30);
-    this.setState({ next: arrIds[randomInt] });
-  }
-
-  componentDidUpdate() {
-    if (this.state.origin === this.props.data.artwork.place_of_origin) {
-      this.state.answer = true;
-      console.log("correct!!!!");
-    } else {
-      this.state.answer = false;
-      console.log("wrong!!!!");
-    }
   }
 
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
-  }
-
-  handleCheckOrigin() {
-    const { origin } = this.state;
-    const originAnswer = this.props.data.artwork.place_of_origin;
-    if (origin === originAnswer) {
-      this.setState({ answer: true });
+    if (this.state.guess === "") {
+      this.setState({ tryAgain: false });
+      this.setState({ answer: false });
     }
   }
 
-  // handleNext() {
-
-  // }
+  handleCheckOrigin() {
+    const { guess } = this.state;
+    const originAnswer = this.props.data.artwork.place_of_origin;
+    if (guess === originAnswer) {
+      this.setState({ tryAgain: false });
+      this.setState({ answer: true });
+    } else {
+      this.setState({ tryAgain: true });
+    }
+  }
 
   render() {
-    // console.log(this.props);
-    console.log(this.state);
-    const { artwork } = this.props.data;
-    const { handleChange, handleCheckOrigin, handleNext } = this;
-    const { date, origin, answer } = this.state;
+    console.log("props!!!", this.props);
+    console.log("state!!!", this.state);
+    const { imageUrl } = this.props.data.artwork.image;
+    const { title, artist_display, date_display, place_of_origin } =
+      this.props.data.artwork;
+    const { handleChange, handleCheckOrigin } = this;
+    const { guess, answer, tryAgain } = this.state;
     return (
       <div>
-        <img src={artwork.image.imageUrl} />
-        <hr />
-        <label htmlFor="origin">Place of origin:</label>
-        <input name="origin" onChange={handleChange} value={origin}></input>
-        <p>
-          <button>Check answer</button>
-        </p>
-        {answer === true ? <p>You got it!</p> : ""}
-        {/* <p>Estimated year:</p>
-        <input name="date" onChange={handleChange} value={date}></input> */}
-        <p>
-          <a href={`/artwork/${this.state.next}`}>
-            <button onClick={handleNext}>Next</button>
-          </a>
-        </p>
-
-        {/* <h3>{artwork.title}</h3>
-              {artwork.artist_display === "" ? (
-                <p>Artist: Unknown</p>
+        <div className="artwork-container">
+          <img src={imageUrl} />
+          <div id="answer" className="artwork-child">
+            <p>
+              <label htmlFor="guess">Place of origin:</label>
+            </p>
+            <input name="guess" onChange={handleChange} value={guess}></input>
+            {answer === true ? <p>You got it!</p> : ""}
+            {tryAgain === true ? <p>Try again!</p> : ""}
+            <p>
+              <button onClick={() => handleCheckOrigin()}>Check answer</button>
+            </p>
+            <p>
+              <button onClick={() => this.setState({ answer: true })}>
+                I give up
+              </button>
+            </p>
+            <div className="solution">
+              {answer === true ? (
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Title: </td>
+                      <td>{title}</td>
+                    </tr>
+                    <tr>
+                      <td>Artist:</td>
+                      <td>{artist_display}</td>
+                    </tr>
+                    <tr>
+                      <td>Date:</td>
+                      <td>{date_display}</td>
+                    </tr>
+                    <tr>
+                      <td>Origin </td>
+                      <td>{place_of_origin}</td>
+                    </tr>
+                  </tbody>
+                </table>
               ) : (
-                <p>Artist: {artwork.artist_display}</p>
+                ""
               )}
-              {artwork.date_display === "" ? (
-                <p>Date: Unknown</p>
-              ) : (
-                <p>Circa: {artwork.date_display}</p>
-              )}
-              {artwork.place_of_origin === "" ? (
-                <p>Place of Origin: Unknown</p>
-              ) : (
-                <p>Place of Origin: {artwork.place_of_origin}</p>
-              )} */}
+            </div>
+          </div>
+        </div>
+        <Footer next={this.state.next} />
       </div>
     );
   }
