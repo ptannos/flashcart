@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 50px;
+  background-color: #f3f3e2;
+}
+
+img {
+  max-width: 30%;
+  border: solid white 5px;
+}
+
+button {
+  background-color: #5b8c5a;
+  color: whitesmoke;
+  padding: 8px;
+  width: 150px;
+  border-radius: 5px;
+}
+
+input {
+  padding: 8px;
+}
