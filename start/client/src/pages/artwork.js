@@ -1,6 +1,7 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import SingleArtwork from "../components/SingleArtwork";
+import Header from "../components/Header";
 
 export const GET_ARTWORK = gql`
   query getSingleArtwork($artworkId: ID!) {
@@ -31,6 +32,7 @@ const Artwork = ({ artworkId }) => {
 
   return (
     <div>
+      <Header />
       <SingleArtwork data={data} />
     </div>
   );

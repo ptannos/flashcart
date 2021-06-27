@@ -47,7 +47,7 @@ class SingleArtwork extends React.Component {
     const { handleChange, handleCheckOrigin } = this;
     const { guess, answer, tryAgain } = this.state;
     return (
-      <div>
+      <div className="origin">
         <div className="artwork-container">
           <img src={imageUrl} />
           <div id="answer" className="answer">
@@ -63,34 +63,33 @@ class SingleArtwork extends React.Component {
             >
               I give up
             </button>
-
-            <div className="solution">
-              {answer === true ? (
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>Title: </td>
-                      <td>{title}</td>
-                    </tr>
-                    <tr>
-                      <td>Artist:</td>
-                      <td>{artist_display}</td>
-                    </tr>
-                    <tr>
-                      <td>Date:</td>
-                      <td>{date_display}</td>
-                    </tr>
-                    <tr>
-                      <td>Origin </td>
-                      <td>{place_of_origin}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              ) : (
-                ""
-              )}
-            </div>
           </div>
+        </div>
+        <div className="solution">
+          {answer === true ? (
+            <table>
+              <tbody>
+                <tr>
+                  <td>Title: </td>
+                  <td>{title}</td>
+                </tr>
+                <tr>
+                  <td>Artist:</td>
+                  <td>{artist_display}</td>
+                </tr>
+                <tr>
+                  <td>Date:</td>
+                  <td>{date_display}</td>
+                </tr>
+                <tr>
+                  <td>Origin </td>
+                  <td>{place_of_origin}</td>
+                </tr>
+              </tbody>
+            </table>
+          ) : (
+            ""
+          )}
         </div>
         <Footer next={this.state.next} />
       </div>
