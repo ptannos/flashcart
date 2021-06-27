@@ -50,21 +50,20 @@ class SingleArtwork extends React.Component {
       <div>
         <div className="artwork-container">
           <img src={imageUrl} />
-          <div id="answer" className="artwork-child">
-            <p>
-              <label htmlFor="guess">Place of origin:</label>
-            </p>
+          <div id="answer" className="answer">
+            <label htmlFor="guess">Place of origin:</label>
             <input name="guess" onChange={handleChange} value={guess}></input>
             {answer === true ? <p>You got it!</p> : ""}
             {tryAgain === true ? <p>Try again!</p> : ""}
-            <p>
-              <button onClick={() => handleCheckOrigin()}>Check answer</button>
-            </p>
-            <p>
-              <button onClick={() => this.setState({ answer: true })}>
-                I give up
-              </button>
-            </p>
+
+            <button onClick={() => handleCheckOrigin()}>Check answer</button>
+
+            <button
+              onClick={() => this.setState({ answer: true, tryAgain: false })}
+            >
+              I give up
+            </button>
+
             <div className="solution">
               {answer === true ? (
                 <table>

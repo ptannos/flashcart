@@ -10,16 +10,16 @@ class Footer extends React.Component {
 
   componentDidMount() {
     const arrIds = [
-      12267, 12985, 13004, 13123, 13125, 11827, 13415, 13417, 40184, 14105,
-      14111, 12679, 12681, 10271, 11118, 12236, 12862, 12867, 12872, 12891,
-      12930, 21678, 59927, 56175,
+      12267, 12985, 13004, 13125, 11827, 13415, 13417, 40184, 14111, 12679,
+      12681, 11118, 12236, 12867, 12872, 12891, 3441, 21678, 59927, 56175,
+      12334, 12339, 12897, 30157, 30172, 58876, 9154, 7816, 9274, 5678, 6737,
+      8858, 8617, 8489,
     ];
-    const randomInt = Math.floor(Math.random() * 30);
+    const randomInt = Math.floor(Math.random() * 33);
     this.setState({ next: arrIds[randomInt] });
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <footer>
