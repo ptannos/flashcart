@@ -15,4 +15,4 @@ cd final/client && npm i && npm start
 ```
 
 ## About Me
-Pauline Tannos | <a href="https://www.linkedin.com/in/pauline-tannos/"LinkedIn</a> | <a href="https://github.com/ptannos">Github</a> 
+Pauline Tannos | <a href="https://www.linkedin.com/in/pauline-tannos/">LinkedIn</a> | <a href="https://github.com/ptannos">Github</a> 
